@@ -39,6 +39,10 @@ h1 {
 #chart {
   height: 600px;
 }
+#chart:empty {
+  background: white url(/images/chart-icon.png) no-repeat scroll center;
+  height: 600px;
+}
 
 form#site {
 	margin: 1em;

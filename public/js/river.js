@@ -54,7 +54,7 @@ function query(site_number) {
 				stripLines: [
 					{	startValue: new Date( today.getFullYear(), 6-1,  1 ),
 						endValue:	new Date( today.getFullYear(), 6-1, 30 ),
-						color: "d0e0f0",
+						color: "e5eeff",
 						labelBackgroundColor: "white",
 						labelFontColor: "black",
 						label: "June"
@@ -68,7 +68,7 @@ function query(site_number) {
 					},
 					{	startValue: new Date( today.getFullYear(), 8-1,  1 ),
 						endValue:	new Date( today.getFullYear(), 8-1, 31 ),
-						color: "d0e0f0",
+						color: "e5eeff",
 						labelBackgroundColor: "white",
 						labelFontColor: "black",
 						label: "August"

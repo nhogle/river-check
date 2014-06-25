@@ -1,0 +1,38 @@
+body {
+  margin: auto;
+  padding: 1em;
+  width: 960px;
+}
+body, div, button, input, .ui-widget {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#container {
+  position: relative;
+  border: 1px solid #ddd;
+  padding: 1em;
+}
+
+#chart {
+  height: 600px;
+}
+
+form#site > div {
+  overflow: hidden;
+  padding-right: 0.5em;
+}
+form#site input, form#site button {
+  font-size: 14pt;
+}
+form#site input[type="text"] {
+  width: 100%;
+}
+form#site button[type="submit"] {
+  float: right;
+}
+
+.ui-autocomplete .ui-menu-item span {
+  color: #bbb;
+  font-size: 75%;
+}
+

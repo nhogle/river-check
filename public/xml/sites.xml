@@ -4607,6 +4607,175 @@
 		<site agc="USGS" cat="LK" lat="42.43916489" lng="-122.0122388" sna="MID-NORTH - LOWER  - MDNL" sno="422622122004000"/>
 	</colocated_sites>
 	<sites>
+		<site agc="USGS" cat="ST" lat="40.139309" lng="-123.991423" sna="MATTOLE R NR ETTERSBURG CA" sno="11468900"/>
+		<site agc="USGS" cat="ST" lat="41.5109543" lng="-123.9795164" sna="KLAMATH R NR KLAMATH CA" sno="11530500"/>
+		<site agc="USGS" cat="ST" lat="47.23147599" lng="-123.974063" sna="HUMPTULIPS RIVER BELOW HWY 101 NR HUMPTULIPS, WA" sno="12039005"/>
+		<site agc="USGS" cat="ST" lat="40.48041636" lng="-123.890876" sna="VAN DUZEN R NR BRIDGEVILLE CA" sno="11478500"/>
+		<site agc="USGS" cat="ST" lat="47.4575863" lng="-123.8893446" sna="QUINAULT RIVER AT QUINAULT LAKE, WA" sno="12039500"/>
+		<site agc="USGS" cat="ST" lat="44.7151172" lng="-123.8873348" sna="SILETZ RIVER AT SILETZ, OR" sno="14305500"/>
+		<site agc="USGS" cat="ST" lat="44.06234317" lng="-123.8831659" sna="SIUSLAW RIVER NEAR MAPLETON, OR" sno="14307620"/>
+		<site agc="USGS" cat="ST" lat="45.26649446" lng="-123.847061" sna="NESTUCCA RIVER NEAR BEAVER, OR" sno="14303600"/>
+		<site agc="USGS" cat="ST" lat="44.3859538" lng="-123.831778" sna="ALSEA RIVER NEAR TIDEWATER, OR" sno="14306500"/>
+		<site agc="USGS" cat="ST" lat="40.90596479" lng="-123.815335" sna="REDWOOD C NR BLUE LAKE CA" sno="11481500"/>
+		<site agc="USGS" cat="ST" lat="45.47704975" lng="-123.8084575" sna="WILSON RIVER AT SOLLIE SMITH BR AT TILLAMOOK, OR" sno="14302020"/>
+		<site agc="USGS" cat="ST" lat="47.5109861" lng="-123.8074167" sna="FINLEY CREEK AT NORTHSHORE RD BR NR QUINAULT, WA" sno="12039370"/>
+		<site agc="USGS" cat="ST" lat="40.18181004" lng="-123.7761426" sna="SF EEL R NR MIRANDA CA" sno="11476500"/>
+		<site agc="USGS" cat="ST" lat="45.7039986" lng="-123.755405" sna="NEHALEM RIVER NEAR FOSS, OR" sno="14301000"/>
+		<site agc="USGS" cat="ST" lat="46.3739937" lng="-123.743482" sna="NASELLE RIVER NEAR NASELLE, WA" sno="12010000"/>
+		<site agc="USGS" cat="ST" lat="39.42822378" lng="-123.7377917" sna="NOYO R NR FORT BRAGG CA" sno="11468500"/>
+		<site agc="USGS" cat="ST" lat="45.47593996" lng="-123.7251209" sna="WILSON RIVER NEAR TILLAMOOK, OR" sno="14301500"/>
+		<site agc="USGS" cat="ST" lat="39.8745957" lng="-123.7205775" sna="SF EEL R A LEGGETT CA" sno="11475800"/>
+		<site agc="USGS" cat="ST" lat="45.4462181" lng="-123.7103974" sna="TRASK RIVER ABOVE CEDAR CREEK, NEAR TILLAMOOK, OR" sno="14302480"/>
+		<site agc="USGS" cat="ST" lat="41.049852" lng="-123.673668" sna="TRINITY R A HOOPA CA" sno="11530000"/>
+		<site agc="USGS" cat="ST" lat="39.17045608" lng="-123.668069" sna="NAVARRO R NR NAVARRO CA" sno="11468000"/>
+		<site agc="USGS" cat="ST" lat="42.23177936" lng="-123.66368" sna="ILLINOIS RIVER NEAR KERBY, OR" sno="14377100"/>
+		<site agc="USGS" cat="ST" lat="47.0114831" lng="-123.6554417" sna="WYNOOCHEE RIVER ABOVE BLACK CREEK NR MONTESANO, WA" sno="12037400"/>
+		<site agc="USGS" cat="ST" lat="47.2989784" lng="-123.6532235" sna="WYNOOCHEE RIVER ABOVE SAVE CREEK NEAR ABERDEEN, WA" sno="12036000"/>
+		<site agc="USGS" cat="ST" lat="46.65093418" lng="-123.6526584" sna="WILLAPA RIVER NEAR WILLAPA, WA" sno="12013500"/>
+		<site agc="USGS" cat="ST" lat="39.7295997" lng="-123.6439073" sna="ELDER C NR BRANSCOMB CA" sno="11475560"/>
+		<site agc="USGS" cat="ST" lat="44.24789909" lng="-123.6364936" sna="EAST FORK LOBSTER CREEK NEAR ALSEA, OR." sno="14306340"/>
+		<site agc="USGS" cat="ST" lat="40.2182" lng="-123.63253" sna="EEL R A FORT SEWARD CA" sno="11475000"/>
+		<site agc="USGS" cat="ST" lat="42.80400356" lng="-123.6109071" sna="WEST FORK COW CREEK NEAR GLENDALE, OR" sno="14309500"/>
+		<site agc="USGS" cat="ST" lat="47.38036689" lng="-123.6098916" sna="WYNOOCHEE RIVER NEAR GRISDALE, WA" sno="12035400"/>
+		<site agc="USGS" cat="LK" lat="47.38536686" lng="-123.6057249" sna="WYNOOCHEE LAKE NEAR GRISDALE, WA" sno="12035380"/>
+		<site agc="USGS" cat="ST" lat="40.46375317" lng="-123.605314" sna="SULPHUR C BL DIV DAM NR DINSMORE CA" sno="11477450"/>
+		<site agc="USGS" cat="ST" lat="46.96231778" lng="-123.6046072" sna="CHEHALIS RIVER NEAR MONTESANO, WA" sno="12035100"/>
+		<site agc="USGS" cat="ST" lat="40.46430877" lng="-123.6008694" sna="MILL C BL DIV DAM NR DINSMORE CA" sno="11477425"/>
+		<site agc="USGS" cat="ST" lat="47.970089" lng="-123.5907453" sna="ELWHA RIVER ABOVE LAKE MILLS NR PORT ANGELES, WA" sno="12044900"/>
+		<site agc="USGS" cat="ST" lat="43.43122665" lng="-123.5867573" sna="LITTLE WOLF CREEK NEAR TYEE, OR" sno="14320934"/>
+		<site agc="USGS" cat="ST" lat="48.0548114" lng="-123.5832462" sna="ELWHA RIVER AT MCDONALD BR NEAR PORT ANGELES, WA" sno="12045500"/>
+		<site agc="USGS" cat="ST" lat="43.5859502" lng="-123.5553727" sna="UMPQUA RIVER NEAR ELKTON, OR" sno="14321000"/>
+		<site agc="USGS" cat="ST" lat="48.1120338" lng="-123.5521342" sna="ELWHA RIVER AT DIVERSION NEAR PORT ANGELES, WA" sno="12046260"/>
+		<site agc="USGS" cat="ST" lat="45.32427635" lng="-123.5465012" sna="TUCCA CREEK NEAR BLAINE, OR." sno="14303200"/>
+		<site agc="USGS" cat="ST" lat="41.3034599" lng="-123.5345036" sna="KLAMATH R A ORLEANS" sno="11523000"/>
+		<site agc="USGS" cat="ST" lat="38.7899103" lng="-123.5094535" sna="NF GUALALA R AB SF GUALALA R NR GUALALA CA" sno="11467553"/>
+		<site agc="USGS" cat="ST" lat="39.6715454" lng="-123.4983497" sna="CAHTO C NR LAYTONVILLE CA" sno="11475610"/>
+		<site agc="USGS" cat="ST" lat="47.0006512" lng="-123.4948838" sna="SATSOP RIVER NEAR SATSOP, WA" sno="12035000"/>
+		<site agc="USGS" cat="ST" lat="40.6498627" lng="-123.4942046" sna="SF TRINITY R BL HYAMPOM CA" sno="11528700"/>
+		<site agc="USGS" cat="ST" lat="46.2551111" lng="-123.4824444" sna="UNNAMED SLOUGH, WELCH ISLAND, COLUMBIA RIVER, OR" sno="461518123285700"/>
+		<site agc="USGS" cat="ST" lat="42.15956105" lng="-123.4789509" sna="SUCKER CREEK BLW LITTLE GRAYBACK CK, NR HOLLAND,OR" sno="14375100"/>
+		<site agc="USGS" cat="ST" lat="41.3765154" lng="-123.4770026" sna="SALMON R A SOMES BAR CA" sno="11522500"/>
+		<site agc="USGS" cat="ST" lat="40.11014836" lng="-123.4675244" sna="KEKAWAKA C BL KEKAWAKA C PH DIV NR ZENIA CA" sno="11474780"/>
+		<site agc="USGS" cat="ST" lat="43.13039347" lng="-123.4650748" sna="LOOKINGGLASS CREEK AT BROCKWAY, OR" sno="14311500"/>
+		<site agc="USGS" cat="ST" lat="40.7887498" lng="-123.4400401" sna="TRINITY R NR BURNT RANCH CA" sno="11527000"/>
+		<site agc="USGS" cat="ST" lat="40.37097808" lng="-123.4361411" sna="MAD R BL RUTH RES NR FOREST GLEN CA" sno="11480410"/>
+		<site agc="USGS" cat="ST" lat="42.9234502" lng="-123.428957" sna="COW CREEK NEAR RIDDLE, OR" sno="14310000"/>
+		<site agc="USGS" cat="ST" lat="38.70907868" lng="-123.4266753" sna="SF GUALALA R NR THE SEA RANCH CA" sno="11467510"/>
+		<site agc="USGS" cat="ST" lat="44.04984478" lng="-123.4262097" sna="LONG TOM RIVER NEAR NOTI, OR" sno="14166500"/>
+		<site agc="USGS" cat="ST" lat="43.27205997" lng="-123.4122993" sna="NORTH UMPQUA RIVER AT WINCHESTER, OR" sno="14319500"/>
+		<site agc="USGS" cat="ST" lat="42.3540058" lng="-123.4067276" sna="APPLEGATE RIVER NEAR WILDERVILLE, OR" sno="14369500"/>
+		<site agc="USGS" cat="ST" lat="43.13317169" lng="-123.3984053" sna="SOUTH UMPQUA RIVER NEAR BROCKWAY, OR" sno="14312000"/>
+		<site agc="USGS" cat="ST" lat="41.83512325" lng="-123.3831113" sna="INDIAN C NR HAPPY CAMP CA" sno="11521500"/>
+		<site agc="USGS" cat="ST" lat="46.1608333" lng="-123.3378333" sna="BIRNIE SLOUGH, WHITE'S ISLAND, COLUMBIA RIVER, WA" sno="460939123201600"/>
+		<site agc="USGS" cat="ST" lat="40.28431329" lng="-123.3353034" sna="MAD R AB RUTH RES NR FOREST GLEN CA" sno="11480390"/>
+		<site agc="USGS" cat="ST" lat="44.5262324" lng="-123.334545" sna="MARYS RIVER NEAR PHILOMATH, OR" sno="14171000"/>
+		<site agc="USGS" cat="ST" lat="47.51425666" lng="-123.3298868" sna="NF SKOKOMISH R BL STAIRCASE RPDS NR HOODSPORT, WA" sno="12056500"/>
+		<site agc="USGS" cat="ST" lat="39.70626687" lng="-123.3252913" sna="MF EEL R NR DOS RIOS CA" sno="11473900"/>
+		<site agc="USGS" cat="ST" lat="42.43039607" lng="-123.3178365" sna="ROGUE RIVER AT GRANTS PASS, OR" sno="14361500"/>
+		<site agc="USGS" cat="ST" lat="46.93926375" lng="-123.3143194" sna="CHEHALIS RIVER AT PORTER, WA" sno="12031000"/>
+		<site agc="USGS" cat="LK" lat="44.12067879" lng="-123.3012062" sna="FERN RIDGE LAKE NEAR ELMIRA, OR" sno="14168000"/>
+		<site agc="USGS" cat="ST" lat="44.12345657" lng="-123.2998173" sna="LONG TOM RIVER NEAR ALVADORE, OR" sno="14169000"/>
+		<site agc="USGS" cat="ST" lat="46.54531667" lng="-123.2987167" sna="CHEHALIS RIVER ABOVE MAHAFFEY CREEK NR PE ELL, WA" sno="12019310"/>
+		<site agc="USGS" cat="ST" lat="46.6345457" lng="-123.2968119" sna="ELK CREEK BELOW DEER CREEK NEAR DOTY, WA" sno="12020525"/>
+		<site agc="USGS" cat="ST" lat="44.31290047" lng="-123.2964859" sna="LONG TOM RIVER AT MONROE, OR" sno="14170000"/>
+		<site agc="USGS" cat="ST" lat="45.80705586" lng="-123.2831722" sna="NEHALEM RIVER NEAR VERNONIA, OR" sno="14299800"/>
+		<site agc="USGS" cat="ST" lat="47.34036949" lng="-123.2801586" sna="SOUTH FORK SKOKOMISH RIVER NEAR UNION, WA" sno="12060500"/>
+		<site agc="USGS" cat="ST" lat="46.6173236" lng="-123.277644" sna="CHEHALIS RIVER NEAR DOTY, WA" sno="12020000"/>
+		<site agc="USGS" cat="ST" lat="44.37290039" lng="-123.2614859" sna="LONG TOM R AT BUNDY BRIDGE NR MONROE, OR" sno="442223123153703"/>
+		<site agc="USGS" cat="ST" lat="44.5663611" lng="-123.2568056" sna="WILLAMETTE RIVER AT CORVALLIS, OR" sno="14171600"/>
+		<site agc="USGS" cat="ST" lat="47.32981429" lng="-123.2432128" sna="NORTH FORK SKOKOMISH RIVER NEAR POTLATCH, WA" sno="12059500"/>
+		<site agc="USGS" cat="ST" lat="44.78317527" lng="-123.2345435" sna="LUCKIAMUTE RIVER NEAR SUVER, OR" sno="14190500"/>
+		<site agc="USGS" cat="ST" lat="41.8537379" lng="-123.2322733" sna="KLAMATH R NR SEIAD VALLEY CA" sno="11520500"/>
+		<site agc="USGS" cat="ST" lat="44.5270665" lng="-123.2037084" sna="MUDDY CREEK NEAR PEORIA, OR" sno="443138123120901"/>
+		<site agc="USGS" cat="ST" lat="47.3964809" lng="-123.2034909" sna="NF SKOKOMISH R NR LWR CUSHMAN DAM NR POTLATCH, WA" sno="12058790"/>
+		<site agc="USGS" cat="ST" lat="45.46927968" lng="-123.200109" sna="SCOGGINS CK BLW HENRY HAGG LAKE, NR GASTON, OR" sno="14202980"/>
+		<site agc="USGS" cat="ST" lat="39.1954471" lng="-123.1950048" sna="RUSSIAN R NR UKIAH CA" sno="11461000"/>
+		<site agc="USGS" cat="ST" lat="42.4234538" lng="-123.1925539" sna="ROGUE RIVER ABV SAVAGE RAPIDS DAM NR ROGUE R, OR" sno="14361050"/>
+		<site agc="USGS" cat="ST" lat="39.1973914" lng="-123.1875046" sna="EF RUSSIAN R NR UKIAH CA" sno="11462000"/>
+		<site agc="USGS" cat="ST" lat="46.18122136" lng="-123.1834539" sna="COLUMBIA RIVER @ BEAVER ARMY TERMINAL NR QUINCY,OR" sno="14246900"/>
+		<site agc="USGS" cat="ST" lat="39.1129496" lng="-123.1830602" sna="RUSSIAN R NR TALMAGE CA" sno="11462080"/>
+		<site agc="USGS" cat="ST" lat="45.2056719" lng="-123.1826047" sna="SOUTH YAMHILL RIVER AT MCMINNVILLE, OR" sno="14194150"/>
+		<site agc="USGS" cat="LK" lat="42.8487314" lng="-123.1789493" sna="GALESVILLE RESERVOIR NEAR AZALEA, OR" sno="14308995"/>
+		<site agc="USGS" cat="ST" lat="42.82484286" lng="-123.1789492" sna="COW CREEK NEAR AZALEA, OR" sno="14309000"/>
+		<site agc="USGS" cat="ST" lat="47.3098151" lng="-123.1770995" sna="SKOKOMISH RIVER NEAR POTLATCH, WA" sno="12061500"/>
+		<site agc="USGS" cat="ST" lat="44.27040126" lng="-123.1737036" sna="WILLAMETTE RIVER AT HARRISBURG, OR" sno="14166000"/>
+		<site agc="USGS" cat="ST" lat="44.7492944" lng="-123.1402583" sna="SANTIAM R.; RM 0.1" sno="444502123083000"/>
+		<site agc="USGS" cat="ST" lat="42.2415113" lng="-123.1400485" sna="APPLEGATE RIVER NEAR APPLEGATE, OR" sno="14366000"/>
+		<site agc="USGS" cat="ST" lat="48.0142578" lng="-123.1326773" sna="DUNGENESS RIVER NEAR SEQUIM, WA" sno="12048000"/>
+		<site agc="USGS" cat="ST" lat="39.02656314" lng="-123.1305588" sna="RUSSIAN R NR HOPLAND CA" sno="11462500"/>
+		<site agc="USGS" cat="ST" lat="39.24655605" lng="-123.1302806" sna="EF RUSSIAN R NR CALPELLA CA" sno="11461500"/>
+		<site agc="USGS" cat="ST" lat="40.7818089" lng="-123.1283653" sna="NF TRINITY R A HELENA CA" sno="11526500"/>
+		<site agc="USGS" cat="ST" lat="42.82317665" lng="-123.1258922" sna="COW CREEK ABV GALESVILLE RES, NR AZALEA, OR." sno="14308990"/>
+		<site agc="USGS" cat="ST-CA" lat="45.4401722" lng="-123.1251806" sna="WAPATO CANAL AT PUMP HOUSE, AT GASTON, OR" sno="14202630"/>
+		<site agc="USGS" cat="ST" lat="45.44064167" lng="-123.125" sna="WAPATO CREEK AT SW GASTON ROAD, AT GASTON, OR" sno="14202650"/>
+		<site agc="USGS" cat="ST" lat="45.4748365" lng="-123.124274" sna="TUALATIN RIVER NEAR DILLEY, OR" sno="14203500"/>
+		<site agc="USGS" cat="ST" lat="45.40335278" lng="-123.1219917" sna="WAPATO CREEK AT FLETT ROAD, NEAR GASTON, OR" sno="14202645"/>
+		<site agc="USGS" cat="ST" lat="46.8067665" lng="-123.1201409" sna="CHEHALIS RIVER NEAR ROCHESTER, WA" sno="12028060"/>
+		<site agc="USGS" cat="ST" lat="39.38849566" lng="-123.1161157" sna="EEL R A VAN ARSDALE DAM NR POTTER VALLEY CA" sno="11471500"/>
+		<site agc="USGS" cat="ST" lat="44.09166667" lng="-123.116111" sna="WILLAMETTE RIVER AT OWOSSO BRIDGE AT EUGENE, OR" sno="14158100"/>
+		<site agc="USGS" cat="ST" lat="45.510878" lng="-123.115666" sna="GALES CREEK AT OLD HWY 47, FOREST GROVE, OR" sno="453040123065201"/>
+		<site agc="USGS" cat="ST" lat="40.76653148" lng="-123.1144757" sna="TRINITY R AB NF TRINITY R NR HELENA CA" sno="11526400"/>
+		<site agc="USGS" cat="ST" lat="47.21176109" lng="-123.1129292" sna="GOLDSBOROUGH CREEK ABOVE 7TH STREET AT SHELTON, WA" sno="12076800"/>
+		<site agc="USGS" cat="ST" lat="42.0637361" lng="-123.1114358" sna="APPLEGATE RIVER NEAR COPPER, OR" sno="14362000"/>
+		<site agc="USGS" cat="LK" lat="42.05679178" lng="-123.1094912" sna="APPLEGATE LAKE NEAR COPPER, OR." sno="14361900"/>
+		<site agc="USGS" cat="ST" lat="44.6387328" lng="-123.1067616" sna="WILLAMETTE RIVER AT ALBANY, OR" sno="14174000"/>
+		<site agc="USGS" cat="ST" lat="45.41860278" lng="-123.1049444" sna="HILL CREEK AT SW SPRING HILL RD, NEAR GASTON, OR" sno="14202635"/>
+		<site agc="USGS" cat="ST" lat="46.6256583" lng="-123.1018009" sna="CHEHALIS RIVER NEAR ADNA, WA" sno="12021800"/>
+		<site agc="USGS" cat="ST" lat="45.3793" lng="-123.0960639" sna="AYERS CREEK AT NE NORTH VALLEY RD, NR GASTON, OR" sno="14202550"/>
+		<site agc="USGS" cat="ST" lat="46.44482815" lng="-123.0837376" sna="SOUTH FORK CHEHALIS RIVER NEAR WILDWOOD, WA" sno="12020800"/>
+		<site agc="USGS" cat="ST" lat="44.62166667" lng="-123.0813889" sna="PERIWINKLE CREEK AT 21 AVE SE, AT ALBANY, OR" sno="14174015"/>
+		<site agc="USGS" cat="ST" lat="42.15401355" lng="-123.075323" sna="STAR GULCH NEAR RUCH, OR" sno="14362250"/>
+		<site agc="USGS" cat="ST" lat="44.11845786" lng="-123.071476" sna="MCKENZIE RIVER NR EUGENE, OR" sno="440707123041300"/>
+		<site agc="USGS" cat="ST" lat="38.5065797" lng="-123.0697239" sna="AUSTIN C NR CAZADERO CA" sno="11467200"/>
+		<site agc="USGS" cat="ST" lat="45.68233568" lng="-123.069553" sna="EAST FORK DAIRY CREEK NEAR MEACHAM CORNER, OR" sno="14205400"/>
+		<site agc="USGS" cat="ST" lat="40.7284768" lng="-123.0619736" sna="TRINITY R A JUNCTION CITY CA" sno="11526250"/>
+		<site agc="USGS" cat="ST" lat="38.8793475" lng="-123.0536124" sna="RUSSIAN R NR CLOVERDALE CA" sno="11463000"/>
+		<site agc="USGS" cat="ST" lat="46.17374986" lng="-123.0498379" sna="COAL CREEK SLOUGH PILING REMOVAL 2 CONTROL, WA" sno="461026123025500"/>
+		<site agc="USGS" cat="ST" lat="44.7387325" lng="-123.0498164" sna="SANTIAM RIVER NEAR JEFFERSON, OR" sno="14189050"/>
+		<site agc="USGS" cat="ST" lat="43.72067785" lng="-123.0497994" sna="COAST FORK WILLAMETTE R BLW COTTAGE GROVE DAM, OR" sno="14153500"/>
+		<site agc="USGS" cat="LK" lat="43.7165111" lng="-123.0497992" sna="COTTAGE GROVE LAKE NR COTTAGE GROVE,OREG." sno="14153000"/>
+		<site agc="USGS" cat="ST" lat="44.6347222" lng="-123.0480556" sna="COX CREEK AT GOLDFISH FARM ROAD, AT ALBANY, OR" sno="14174090"/>
+		<site agc="USGS" cat="ST" lat="44.11305556" lng="-123.0469722" sna="MCKENZIE RIVER NEAR COBURG, OR" sno="14165500"/>
+		<site agc="USGS" cat="ST" lat="42.431234" lng="-123.0439366" sna="ROGUE RIVER ABOVE BLACKWELL CREEK, AT GOLD HILL,OR" sno="14359150"/>
+		<site agc="USGS" cat="ST" lat="44.9442863" lng="-123.0428742" sna="WILLAMETTE RIVER AT SALEM, OR" sno="14191000"/>
+		<site agc="USGS" cat="ST" lat="43.4220637" lng="-123.0395097" sna="SOUTH FORK HINKLE CREEK NEAR NONPAREIL, OR" sno="14319830"/>
+		<site agc="USGS" cat="ST" lat="43.4234526" lng="-123.039232" sna="NORTH FORK HINKLE CREEK NEAR NONPAREIL, OR" sno="14319835"/>
+		<site agc="USGS" cat="ST" lat="44.9737305" lng="-123.0373189" sna="WILLAMETTE RIVER AT KEIZER, OR" sno="14192015"/>
+		<site agc="USGS" cat="ST" lat="46.7759343" lng="-123.0356919" sna="CHEHALIS RIVER NEAR GRAND MOUND, WA" sno="12027500"/>
+		<site agc="USGS" cat="ST" lat="44.6386111" lng="-123.0291667" sna="BURKHART CREEK AT SCRAVEL HILL ROAD NEAR ALBANY,OR" sno="443819123014500"/>
+		<site agc="USGS" cat="ST" lat="43.2526179" lng="-123.0261716" sna="LITTLE RIVER AT PEEL, OR" sno="14318000"/>
+		<site agc="USGS" cat="ST" lat="44.6487332" lng="-123.0253705" sna="TRUAX CREEK AT SCRAVEL HILL RD NR DRAPERVILLE, OR" sno="443856123012700"/>
+		<site agc="USGS" cat="ST" lat="41.64069017" lng="-123.015037" sna="SCOTT R NR FORT JONES CA" sno="11519500"/>
+		<site agc="USGS" cat="ST" lat="44.7147222" lng="-123.01425" sna="SANTIAM RIVER AT JEFFERSON, OR" sno="14189000"/>
+		<site agc="USGS" cat="ST" lat="47.68398059" lng="-123.011551" sna="DUCKABUSH RIVER NEAR BRINNON, WA" sno="12054000"/>
+		<site agc="USGS" cat="ST" lat="44.68678868" lng="-123.0064815" sna=" SOUTH SANTIAM RIVER AT RM 0.1" sno="444113123001900"/>
+	</sites>
+	<sites>
+		<site agc="USGS" cat="ST" lat="48.2653434" lng="-124.6257923" sna="SOOES RIVER BLW MILLER CREEK NEAR OZETTE, WA" sno="12043163"/>
+		<site agc="USGS" cat="ST" lat="47.90285217" lng="-124.5454886" sna="BOGACHIEL RIVER NEAR LA PUSH, WA" sno="12043015"/>
+		<site agc="USGS" cat="ST" lat="47.96007697" lng="-124.3929872" sna="CALAWAH RIVER NEAR FORKS, WA" sno="12043000"/>
+		<site agc="USGS" cat="ST" lat="48.24146416" lng="-124.3838328" sna="HOKO RIVER NEAR SEKIU, WA" sno="12043300"/>
+		<site agc="USGS" cat="ST" lat="47.5378588" lng="-124.3157457" sna="QUEETS RIVER NEAR CLEARWATER, WA" sno="12040500"/>
+		<site agc="USGS" cat="ST" lat="40.31319125" lng="-124.283381" sna="MATTOLE R NR PETROLIA CA" sno="11469000"/>
+		<site agc="USGS" cat="ST" lat="47.80674726" lng="-124.2510329" sna="HOH RIVER AT US HIGHWAY 101 NEAR FORKS, WA" sno="12041200"/>
+		<site agc="USGS" cat="ST" lat="43.37983408" lng="-124.2420584" sna="PONY CREEK AT COOS BAY, OR" sno="14324580"/>
+		<site agc="USGS" cat="LK" lat="43.37983408" lng="-124.2415028" sna="LOWER PONY CREEK RESERVOIR AT COOS BAY, OR" sno="14324560"/>
+		<site agc="USGS" cat="ST" lat="40.6156852" lng="-124.202833" sna="EEL R A FERNBRIDGE CA" sno="11479560"/>
+		<site agc="USGS" cat="ST" lat="42.12344278" lng="-124.1873107" sna="CHETCO RIVER NEAR BROOKINGS, OR" sno="14400000"/>
+		<site agc="USGS" cat="ST" lat="43.15705449" lng="-124.1809401" sna="COQUILLE RIVER AT COQUILLE, OR" sno="14327055"/>
+		<site agc="USGS" cat="ST" lat="43.06566537" lng="-124.1470479" sna="SF COQUILLE RIVER AT MYRTLE POINT, OR" sno="14326510"/>
+		<site agc="USGS" cat="ST" lat="41.8806684" lng="-124.1364704" sna="SMITH R NR FORT DICK CA" sno="11532650"/>
+		<site agc="USGS" cat="ST" lat="40.49152384" lng="-124.0997699" sna="EEL R A SCOTIA CA" sno="11477000"/>
+		<site agc="USGS" cat="ST" lat="41.0098479" lng="-124.0814555" sna="LITTLE R NR TRINIDAD CA" sno="11481200"/>
+		<site agc="USGS" cat="ST" lat="41.7915026" lng="-124.0761887" sna="SMITH R NR CRESCENT CITY CA" sno="11532500"/>
+		<site agc="USGS" cat="ST" lat="42.89149904" lng="-124.070652" sna="SOUTH FORK COQUILLE RIVER AT POWERS, OR" sno="14325000"/>
+		<site agc="USGS" cat="ST" lat="40.9098497" lng="-124.0606183" sna="MAD R NR ARCATA CA" sno="11481000"/>
+		<site agc="USGS" cat="ST" lat="42.5784422" lng="-124.0581443" sna="ROGUE RIVER NEAR AGNESS, OR" sno="14372300"/>
+		<site agc="USGS" cat="ST" lat="41.2992896" lng="-124.0511825" sna="REDWOOD C A ORICK CA" sno="11482500"/>
+		<site agc="USGS" cat="ST" lat="44.5146833" lng="-124.04175" sna="BEAVER CREEK ABV S BEAVER CREEK NR SEAL ROCK, OR" sno="442848123552500"/>
+		<site agc="USGS" cat="ST" lat="40.351528" lng="-124.0050423" sna="BULL C NR WEOTT CA" sno="11476600"/>
+	</sites>
+	<sites>
 		<site agc="USGS" cat="ST" lat="46.7836111" lng="-67.9891667" sna="Hardwood Brook below Glidden Brk nr Caribou, Maine" sno="01017060"/>
 		<site agc="USGS" cat="ST" lat="46.0885" lng="-67.96813889" sna="Meduxnekeag River nr New Limerick, Maine" sno="01017850"/>
 		<site agc="USGS" cat="ST" lat="46.62805556" lng="-67.9530556" sna="Williams Brook at Phair, Maine" sno="01017550"/>

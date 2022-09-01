@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     kgio (2.9.2)
-    rack (2.2.3)
+    rack (2.2.4)
     raindrops (0.13.0)
     unicorn (4.8.3)
       kgio (~> 2.6)
@@ -20,4 +20,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

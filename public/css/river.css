@@ -95,10 +95,6 @@ ul.ui-autocomplete {
   cursor: pointer;
 }
 
-#map .feature.active {
-  fill: green;
-}
-
 #map .mesh {
   fill: none;
   stroke: #2f4974;
@@ -106,6 +102,6 @@ ul.ui-autocomplete {
   stroke-linejoin: round;
 }
 
-#map .usgs-site {
+#map .marker.selected {
   fill: white;
 }

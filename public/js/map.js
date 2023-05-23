@@ -1,5 +1,4 @@
 var g, active, path, svg, zoom, projection;
-var marker;
 var width = 930,
     height = 600;
 
@@ -44,8 +43,7 @@ d3.json("/js/us.json", function(error, us) {
       .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
       .attr("d", path)
-      .attr("class", "feature")
-      .on("click", clicked);
+      .attr("class", "feature");
 
   states.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -70,14 +68,6 @@ function zoom_to_bounds(bounds) {
       .call(zoom.translate(translate).scale(scale).event);
 }
 
-function clicked(d) {
-  if (active.node() === this) return reset();
-  active.classed("active", false);
-  active = d3.select(this).classed("active", true);
-
-  zoom_to_bounds(path.bounds(d));
-}
-
 function reset() {
   active.classed("active", false);
   active = d3.select(null);
@@ -90,10 +80,9 @@ function reset() {
 function zoomed() {
   g.style("stroke-width", 1.5 / d3.event.scale + "px");
   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  console.log("zoom: ", zoom.scale());
 
   // Keep circle markers at constant size no matter zoom level
-  g.selectAll('circle')
+  g.selectAll('.marker')
     .attr('r', 5 / zoom.scale());
 }
 
@@ -127,10 +116,11 @@ function zoom_markers( data, onHover, onClick ) {
     return `translate(${c[0]}, ${c[1]})`;
   }
 
-  var circle = sites.selectAll("circle")
+  var markers = sites.selectAll(".marker")
     .data(data, d => d.id);
 
-  circle.enter().append("circle")
+  markers.enter().append("circle")
+      .classed( "marker", true )
       .attr( "transform", transform )
       .attr( "fill", "#3333aa")
       .attr( "opacity", 0.5)
@@ -139,8 +129,8 @@ function zoom_markers( data, onHover, onClick ) {
       .on('click', onClick)
     .transition(t)
       .ease('back-out')
-      .attr( "r", 3 );
-  circle.exit()
+      .attr( "r", 5 );
+  markers.exit()
     .transition(t)
       .ease('back-in')
       .attr( "r", 0 )
@@ -163,22 +153,9 @@ function highlight_marker( item, zoomToMarker=false ) {
       scale = 8.0,
       translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-  const isSelected = (d) => d.id == item.id;
-
-  var circle = sites.selectAll("circle")
-    .attr( "class" , (d) => isSelected(d) ? "selected usgs-site" : "")
+  var markers = sites.selectAll(".marker")
+    .classed("selected", (d) => d.id == item.id)
   ;
-    
-  /*
-  if ( marker ) 
-      d3.select(marker).node().remove();
-
-  marker = g.append('svg:circle')
-      .attr( "cx", x )
-      .attr( "cy", y )
-      .attr( "class", "usgs-site")
-      .attr( "r", 1 );
-  */
 
   if (zoomToMarker) {
     svg.transition()

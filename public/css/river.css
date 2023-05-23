@@ -39,10 +39,11 @@ h1 {
   margin: 1em;
 }
 
-#chart {
+.flow-chart {
   height: 600px;
 }
-#chart:empty {
+
+#placeholder {
   background: white url(/images/chart-icon.png) no-repeat scroll center;
   height: 600px;
 }
@@ -75,8 +76,7 @@ ul.ui-autocomplete {
 	overflow-y: scroll;
 }
 
-
-#chart {
+.flow-chart {
 	display:none;
 }
 

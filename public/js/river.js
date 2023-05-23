@@ -9,10 +9,92 @@ function date_to_string( date ) {
   return date.toISOString().split('T')[0];
 }
 
+function decodeHtml(str) {
+  return ($.parseHTML(str)[0]?.wholeText || "");
+}
+
+function getYAxisSuffix(variable) {
+  const map = {
+    "Gage height, ft": " ft",
+    "Streamflow, ft&#179;/s": " ft³/s",
+  }
+
+  return map[variable.variableName] 
+    || variable?.unit?.unitCode
+    || "ft per sec"
+}
+
+class Chart {
+  constructor(name) {
+    this.name = name;
+    this.chartData = [];
+  }
+
+  build(timeSeries, variableCode, variable) {
+    const titleOptions = {
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSize: 20,
+      text: this.constructor.extractTitle(timeSeries?.[0]?.sourceInfo),
+    };
+
+    const yAxisOptions = {
+      labelFontSize: 16,
+      suffix: getYAxisSuffix(variable),
+      includeZero: true
+    };
+
+    const subtitleText = decodeHtml(variable.variableName);
+
+    const options = {
+      zoomEnabled: true,
+      title: titleOptions,
+      subtitles: [ {text: subtitleText} ],
+      legend: {
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: 12,
+      },
+      axisX : {
+        interlacedColor: "#e5eeff",
+        valueFormatString: "MMMM",
+        labelBackgroundColor: "white",
+        labelFontColor: "black",
+        labelFontSize: 16,
+        interval: 1,
+        intervalType: 'month'
+      },
+    };
+
+    const id = `chart-${variableCode}`;
+    const $el = $(`<div class="flow-chart" id="${id}" />`);
+    $('#container').append($el);
+
+    this.chartCanvas = new CanvasJS.Chart(id, {
+      ...options,
+      axisY: yAxisOptions,
+      data: this.chartData
+    });
+
+    return this;
+  }
+
+  addData(dataSeries) {
+    this.chartData.push(dataSeries);
+  }
+
+  render() {
+    this.chartCanvas.render();
+  }
+
+  static extractTitle(sourceInfo) {
+    return sourceInfo ? `${sourceInfo.siteName?.toTitleCase()} - Site no: ${sourceInfo.siteCode?.[0]?.value}`
+      : 'No river flow data available';
+  }
+
+}
+
 function query(site_number) {
-  var chart_data = [];
-  var chart_y_axes = {};
-  var chart = "";
+  $('.flow-chart').remove();
+  const theCharts = {};
 
   var today = new Date();
   var this_month = today.getMonth();
@@ -23,8 +105,9 @@ function query(site_number) {
   //var one_month_ago = new Date( today - (30*24*3600*1000) );
   var one_year_ago = new Date( today.getFullYear()-1, today.getMonth(), today.getDate() );
 
-  var last_year_start = new Date( one_year_ago.getFullYear(), one_year_ago.getMonth()-4,  1 );
-  var last_year_end = new Date( one_year_ago.getFullYear(), one_year_ago.getMonth()+1, 30 );
+  var last_year_start = new Date( one_year_ago.getFullYear(), one_year_ago.getMonth()-3,  1 );
+  //var last_year_end = new Date( one_year_ago.getFullYear(), one_year_ago.getMonth()+3, 30 );
+  var last_year_end = new Date( one_year_ago.getFullYear(), 8, 30 );
 
   //const base_uri = `http://waterservices.usgs.gov/nwis/stat/?format=json&sites=${site_number}&parameterCd=00060`;
   //const base_uri = 'http://nwis.waterservices.usgs.gov/nwis/iv/?sites=' + site_number + '&format=json&parameterCd=00060';
@@ -35,15 +118,13 @@ function query(site_number) {
   const base_uri   = `https://nwis.waterservices.usgs.gov/nwis/iv/?site=${site_number}&format=json&parameterCd=00060,00065`;
 
   show_spinner();
+  $('#placeholder').show();
 
-  function extractTimeSeries(response) {
-    return response?.value?.timeSeries;
-  }
-
-  function extractTitle(sourceInfo) {
-    return sourceInfo ? `${sourceInfo.siteName?.toTitleCase()} - Site no: ${sourceInfo.siteCode?.[0]?.value}`
-      : 'No river flow data available';
-  }
+  function renderCharts() {
+    for (const [name, chart] of Object.entries(theCharts)) {
+      chart.render();
+    }
+  };
 
   const uri = base_uri
       + "&startDT=" + date_to_string( this_year_start )
@@ -52,103 +133,16 @@ function query(site_number) {
 
   jQuery.getJSON(uri, handle0);
 
+  function extractTimeSeries(response) {
+    return response?.value?.timeSeries;
+  }
+
   function handle0(response) {
     timeSeries = extractTimeSeries(response);
-    var the_chart_title = {
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSize: 20,
-      text: extractTitle(timeSeries?.[0]?.sourceInfo),
-    };
 
-    const chart_options = {
-      zoomEnabled: true,
-      title: the_chart_title,
-      legend: {
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: 12,
-      },
-      axisX : {
-        /*
-        stripLines: [
-          { startValue: new Date( today.getFullYear(), this_month-4,  1 ),
-            endValue: new Date( today.getFullYear(), this_month-4, 30 ),
-            color: "#e5eeff",
-            labelBackgroundColor: "white",
-            labelFontColor: "black",
-            label: "April"
-          },
-          { startValue: new Date( today.getFullYear(), this_month-3,  1 ),
-            endValue: new Date( today.getFullYear(), this_month-3, 31 ),
-            color: "white",
-            labelBackgroundColor: "white",
-            labelFontColor: "black",
-            label: "May"
-          },
-          { startValue: new Date( today.getFullYear(), this_month-2,  1 ),
-            endValue: new Date( today.getFullYear(), this_month-2, 30 ),
-            color: "#e5eeff",
-            labelBackgroundColor: "white",
-            labelFontColor: "black",
-            label: "June"
-          },
-          { startValue: new Date( today.getFullYear(), this_month-1,  1 ),
-            endValue: new Date( today.getFullYear(), this_month-1, 31 ),
-            color: "white",
-            labelBackgroundColor: "white",
-            labelFontColor: "black",
-            label: "July"
-          },
-          { startValue: new Date( today.getFullYear(), this_month-0,  1 ),
-            endValue: new Date( today.getFullYear(), this_month-0, 31 ),
-            color: "#e5eeff",
-            labelBackgroundColor: "white",
-            labelFontColor: "black",
-            label: "August"
-          },
-          { startValue: new Date( today.getFullYear(), this_month+1,  1 ),
-            endValue: new Date( today.getFullYear(), this_month+1, 30 ),
-            color: "white",
-            labelBackgroundColor: "white",
-            labelFontColor: "black",
-            label: "September"
-          }
-        ],
-        */
-        interlacedColor: "#e5eeff",
+    drawChart(extractTimeSeries(response), "This Year's Flow");
+    $('#placeholder').hide();
 
-        //minimum: new Date( today.getFullYear(), 5-1, 15 ),
-        //maximum: new Date( today.getFullYear(), 9-1, 30 ),
-        valueFormatString: "MMMM",
-        labelBackgroundColor: "white",
-        labelFontColor: "black",
-        labelFontSize: 16,
-
-        interval: 1,
-        //interlacedColor: '#c0d0f0',
-        intervalType: 'month'
-      },
-    };
-
-    const y_axis_options = [
-      {
-        labelFontSize: 16,
-        suffix:" ft³/s",
-        includeZero: true
-      },
-      {
-        labelFontSize: 16,
-        suffix:" height (ft)",
-        includeZero: true
-      },
-    ];
-
-    chart = new CanvasJS.Chart("chart", {
-      ...chart_options,
-      axisY: y_axis_options,
-      data: chart_data
-    });
-
-    handleQueryResponse(response, 0, "This Year's Flow");
     jQuery.getJSON(
       base_uri
         + "&startDT=" + date_to_string( last_year_start )
@@ -157,48 +151,83 @@ function query(site_number) {
   }
 
   function handle1(response) {
-    handleQueryResponse(response, 365, "Last Year's Flow");
+    drawChart(extractTimeSeries(response), "Last Year's Flow", 365);
+
+    //const theUrl = `${base_uri}&startDt=${date_to_string( last_year_start )}&endDT=${date_to_string( last_year_end )}`;
+
+    // Average Data
+    const theUrl = `https://waterservices.usgs.gov/nwis/stat/?sites=${site_number}&statType=mean`;
+
+    jQuery.get( theUrl, (response) => {
+      console.log ("Got average data:", response);
+
+      const data = processRdb(response, today);
+
+      // Process data from averages format into the same format as the iv data...
+      // We need:
+      // - 
+      //  variable: 
+      //    variableName: string
+      //    variableDescription: string
+      //    options:
+      //      option:
+      //        - value: string
+      //    noDataValue: number
+      //  values:
+      //    - value: [
+      //      - <data-value>
+      //
+      // -OR- We can just create another drawChart function...
+      // yeah... that's a better idea
+      drawAverageChart(data);
+
+    });
+
     hide_spinner();
   }
 
-  function handleQueryResponse(response, offset, name) {
-    const timeSeries = extractTimeSeries(response);
-
-    if (!offset) offset = 0;
-    //console.log(response);
-
-    console.log( "Data: ", timeSeries);
-
-    function decodeHtml(str) {
-      return ($.parseHTML(str)[0]?.wholeText || "");
+  function drawAverageChart(rdbData) {
+    // For each USGS variable-code that we're interested in, find that existing
+    // chart and add a new time series to it as an average
+    for (const [variableCode, dataPoints] of Object.entries(rdbData)) {
+      const chart = theCharts[variableCode];
+      const dataSeries = {
+        showInLegend: true,
+        legendText: "Average",
+        markerSize: 0,
+        type: "spline",
+        dataPoints,
+      };
+      chart?.addData(dataSeries);
     }
 
-    for (series of timeSeries) {
-      const theVar = series.variable;
+    renderCharts();
+  }
+
+  function drawChart(timeSeries, name, offset=0) {
+    console.log( "Data: ", timeSeries);
+
+    for ( const {values: [{value: theData}], variable: theVar} of timeSeries) {
       console.log(`Variable: name=[${decodeHtml(theVar.variableName)}]  desc=[${decodeHtml(theVar.variableDescription)}] option=[${decodeHtml(theVar.options?.option?.[0]?.value)}]`)
       console.log(`  ${JSON.stringify(theVar, 0, 4)}\n\n`);
 
-      const noDataValue = "" + theVar.noDataValue;
+      // Extract variable information
+      const {variableName, variableCode: [{value: variableCode}], } = theVar;
 
-      var variableName = series.variable.variableName;
+      // Create a new chart or add to existing chart
+      const chart = theCharts[variableCode] || new Chart(variableName).build(timeSeries, variableCode, theVar);
+      theCharts[variableCode] = chart;
+
+      show_chart();
+
       //if (! variableName.match(/flow/i))
         //continue;
 
-      chart_y_axes[variableName] = {
-        labelFontSize: 16,
-        suffix: " ft³/s",
-        includeZero: true
-      };
-
-      //const test = Object.entries(chart_y_axes);
-      const axisYIndex = Object.entries(chart_y_axes).findIndex( e => e[0] == variableName );
-
       var dataPoints = [];
-      var the_data = series.values[0].value;
+      const noDataValue = "" + theVar.noDataValue;
 
       var last_day = undefined;
-      for (var i=0; i<the_data.length; i++) {
-        var d = the_data[i];
+      for (const d of theData) {
         var date = new Date( (new Date(d.dateTime)) - (-offset*24*3600*1000));
 
         // Omit bad values
@@ -218,20 +247,54 @@ function query(site_number) {
 
       const dataSeries = {
         showInLegend: true,
-        name: series.variable.variableDescription,
+        name: theVar.variableDescription,
         //legendText: series.variable.variableName,
         legendText: name,
         markerSize: 0,
-        type: axisYIndex == 0 ? "spline" : "area",
+        type: "spline",
         dataPoints: dataPoints,
-        axisYIndex: axisYIndex,
+        //axisYIndex: chartIndex,
       };
 
-      chart_data.push(dataSeries);
+      chart.addData(dataSeries);
     }
 
-    chart.render();
+    renderCharts();
   }
+}
+
+function processRdb(text, today) {
+  const lines = text.trim().split(/\n/).filter( l => !l.startsWith('#'));
+  const [columnLine, descLine, ...rowLines] = lines;
+  const columns = columnLine.split(/\t/);
+  const descs   = descLine.split(/\t/);
+
+  const makeRow = (row) => {
+    return columns.reduce( (obj, col, i) => ({...obj, [col]: row.split(/\t/)[i] }), {} );
+  }
+  const rows = rowLines.map(makeRow);
+
+  console.log(rows);
+
+  // Partition the output by variable, and create a drawable chart time series for each variable-code
+  // TODO: do this in one pass?
+  const ret = {};
+  for (const {
+    parameter_cd: variableCode,
+    mean_va: value,
+    day_nu: day,
+    month_nu: month,
+  } of rows) {
+    const dataPoints = ret[variableCode] ||= [];
+    // USGS returns 1-based months, but we need 0-based month
+    const date = new Date(today.getFullYear(), month-1, day);
+    dataPoints.push({
+      x: date,
+      y: parseInt(value)
+    });
+  }
+
+  return ret;
 }
 
 function show_error() {
@@ -241,6 +304,8 @@ function show_error() {
 }
 
 function load_sites() {
+  $('#placeholder').hide();
+
   jQuery.ajax( {
     url: "/xml/sites.xml",
     dataType: "xml",
@@ -254,61 +319,128 @@ function load_sites() {
         };
       }).get();
       setup_autocomplete( data );
+      selectSiteFromUrl( data );
     }
   });
 }
 
-function setup_autocomplete( data ) {
-  $( "#site_name" ).autocomplete( {
-    source: function( request, response ) {
-      var terms = request.term.split(/\s+/);
-      var candidates = data;
-      var results = [];
+function selectSiteFromUrl(data) {
+  const params = window.location.hash.slice(1);
+  const match = params.match(/site-(\d+)/)
+  if (match) { 
+    const siteId = match[1];
+    const datum = data.find( (d) => d.id == siteId );
+    console.log("Loading page directly to site ID: : ", siteId, datum);
+    handleSelection(datum.value, datum.id);
+  }
+}
 
-      for( var i=0; i<terms.length; i++) {
-        var r = new RegExp( $.ui.autocomplete.escapeRegex(terms[i]), "i" );
-        results = [];
-        for( var j=0; j<candidates.length; j++) {
-          if (candidates[j].value.match(r)) {
-            results.push( candidates[j] );
+function handleSelection(site_name, site_number) {
+  $("#site_name").val( site_name );
+  $("#site_number").val( site_number );
+
+  console.log( `Selected: ${site_name}, site id: ${site_number}` );
+  $("#site").submit();
+  show_chart();
+}
+
+function setup_autocomplete( data ) {
+  const mapSelectionEvent = new $.Event("map-selection-event");
+  function eventWasFromMap(event) {
+    return event?.originalEvent?.originalEvent?.type == mapSelectionEvent.type;
+  }
+
+  const widget = $( "#site_name" )
+    .autocomplete({
+      source: function( request, response ) {
+        var terms = request.term.split(/\s+/);
+        var candidates = data;
+        var results = [];
+
+        for( var i=0; i<terms.length; i++) {
+          var r = new RegExp( $.ui.autocomplete.escapeRegex(terms[i]), "i" );
+          results = [];
+          for( var j=0; j<candidates.length; j++) {
+            if (candidates[j].value.match(r)) {
+              results.push( candidates[j] );
+            }
+          }
+          candidates = results;
+        }
+        //console.log( results );
+        response(results);
+      },
+      response: function( event, ui ) {
+        hide_chart();
+
+        const menu = widget.menu;
+        console.log('widget: ', widget);
+        console.log('menu: ', menu);
+
+        zoom_markers(ui.content, onHover, onClick);
+
+        function findMenuItem(d) {
+          console.log('omg', d, this);
+          const menuItem = menu.element.find(`.ui-menu-item[data-site-id=${d.id}]` ).first();
+          console.log('menuItem: ', menuItem);
+          return menuItem;
+        }
+
+        function onHover(d) {
+          menu.focus(mapSelectionEvent, findMenuItem(d));
+        }
+
+        function onClick(d) {
+          menu.select(mapSelectionEvent, findMenuItem(d));
+        }
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        if (ui.item) {
+          const site_name = ui.item.value;
+          const site_number = ui.item.id;
+          const params = {site_name, site_number};
+
+          history.pushState( params, "", `#site-${params.site_number}`)
+
+          handleSelection(site_name, site_number);
+
+          if (!eventWasFromMap(event)) {
+            highlight_marker( ui.item );
           }
         }
-        candidates = results;
+        else {
+          console.log( "Nothing selected, input was " + this.value );
+        }
+
+        return false;
+      },
+      focus: function( event, ui ) {
+        const fromMap = eventWasFromMap(event);
+        const doMapZoom = !fromMap
+
+        console.log(`Highlighting river site: ${ui.item}, eventSource: ${fromMap ? "map" : "menu-focus"}`);
+
+        hide_chart();
+        highlight_marker( ui.item, doMapZoom );
+
+        return false;
       }
-      //console.log( results );
-      response(results);
-    },
-    response: function( event, ui ) {
-      hide_chart();
-      zoom_markers(ui.content);
-    },
-    minLength: 3,
-    select: function( event, ui ) {
-      $("#site_name").val( ui.item.value );
-      $("#site_number").val( ui.item.id );
-      console.log( ui.item ?
-        "Selected: " + ui.item.value + ", site id: " + ui.item.id :
-        "Nothing selected, input was " + this.value );
-      $("#site").submit();
-      zoom_marker( ui.item );
-      show_chart();
-      return false;
-    },
-    focus: function( event, ui ) {
-      hide_chart();
-      zoom_marker( ui.item );
-      return false;
-    }
-  } )
-  .data("ui-autocomplete")._renderItem = function(ul, item) {
+    })
+    .data("ui-autocomplete");
+
+  widget._renderItem = function(ul, item) {
     var a = $( "<a>" + item.value + " <span>site id: " + item.id + "</span></a>" );
     a.attr( "data-lng", item.lng );
     a.attr( "data-lat", item.lat );
+    a.attr( "data-site-id", item.id );
 
     return $("<li>")
+      .attr( "data-site-id", item.id )
       .append(a)
       .appendTo( ul );
   };
+
 }
 
 var spinner = undefined;
@@ -340,13 +472,14 @@ function hide_spinner() {
 }
 
 function hide_chart() {
-  $("#chart").hide();
+  $(".flow-chart").hide();
+  $('#placeholder').hide();
   $("#map").show();
   hide_spinner();
 }
 
 function show_chart() {
-  $("#chart").show();
+  $(".flow-chart").show();
   $("#map").hide();
 }
 

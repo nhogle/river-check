@@ -14,7 +14,7 @@ projection = d3.geo.albersUsa()
 zoom = d3.behavior.zoom()
     .translate([0, 0])
     .scale(1)
-    .scaleExtent([1, 8])
+    .scaleExtent([1, 25])
     .on("zoom", zoomed);
 
 path = d3.geo.path()
@@ -90,6 +90,11 @@ function reset() {
 function zoomed() {
   g.style("stroke-width", 1.5 / d3.event.scale + "px");
   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  console.log("zoom: ", zoom.scale());
+
+  // Keep circle markers at constant size no matter zoom level
+  g.selectAll('circle')
+    .attr('r', 5 / zoom.scale());
 }
 
 // If the drag behavior prevents the default click,
@@ -111,12 +116,11 @@ function feature(d) {
   }
 }
 
-function zoom_markers( data ) {
+function zoom_markers( data, onHover, onClick ) {
   console.log(`Zooming to set of ${data.length} items.`);
 
   var t = sites.transition()
-    .duration(400)
-    .ease('easeBack');
+    .duration(600);
 
   function transform(d) {
     var c = path.centroid(feature(d));
@@ -129,10 +133,16 @@ function zoom_markers( data ) {
   circle.enter().append("circle")
       .attr( "transform", transform )
       .attr( "fill", "#3333aa")
+      .attr( "opacity", 0.5)
       .attr( "r", 0 )
+      .on('mouseover', onHover)
+      .on('click', onClick)
     .transition(t)
-      .attr( "r", 1 );
-  circle.exit().transition(t)
+      .ease('back-out')
+      .attr( "r", 3 );
+  circle.exit()
+    .transition(t)
+      .ease('back-in')
       .attr( "r", 0 )
       .remove();
 
@@ -141,18 +151,25 @@ function zoom_markers( data ) {
     zoom_to_bounds(bounds);
   }
   else if (data.length == 1) {
-    zoom_marker(data[0]);
+    highlight_marker(data[0]);
   }
 }
 
-function zoom_marker( item ) {
+function highlight_marker( item, zoomToMarker=false ) {
   var r = path.centroid(feature(item));
 
   var x = r[0],
       y = r[1],
-      scale = 3.0,
+      scale = 8.0,
       translate = [width / 2 - scale * x, height / 2 - scale * y];
 
+  const isSelected = (d) => d.id == item.id;
+
+  var circle = sites.selectAll("circle")
+    .attr( "class" , (d) => isSelected(d) ? "selected usgs-site" : "")
+  ;
+    
+  /*
   if ( marker ) 
       d3.select(marker).node().remove();
 
@@ -160,10 +177,12 @@ function zoom_marker( item ) {
       .attr( "cx", x )
       .attr( "cy", y )
       .attr( "class", "usgs-site")
-      .attr( "r", 3 );
+      .attr( "r", 1 );
+  */
 
-  svg.transition()
-      .duration(750)
-      .call(zoom.translate(translate).scale(scale).event);
-
+  if (zoomToMarker) {
+    svg.transition()
+        .duration(750)
+        .call(zoom.translate(translate).scale(scale).event);
+  }
 }

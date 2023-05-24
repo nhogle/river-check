@@ -23,13 +23,7 @@
 		<script src="/js/map.js"></script>
 
 		<script type="text/javascript">
-			$(document).ready( function() {
-				load_sites();
-				$("#site").submit( function(event) {
-					query( $("#site_number").val() );
-					event.preventDefault();
-				} );
-			} );
+			$(document).ready( onPageReady );
 		</script>
 	</head>
 

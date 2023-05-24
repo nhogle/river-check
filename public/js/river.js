@@ -1,7 +1,8 @@
-﻿String.prototype.toTitleCase = function () {
+﻿String.prototype.beautifyRiverName = function () {
   ret = this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   ret = ret.replace( /Blw /, "Below " );
   ret = ret.replace( /Nr /, "Near " );
+  ret = ret.replace( /Rv /, "River " );
   return ret;
 };
 
@@ -86,7 +87,7 @@ class Chart {
   }
 
   static extractTitle(sourceInfo) {
-    return sourceInfo ? `${sourceInfo.siteName?.toTitleCase()} - Site no: ${sourceInfo.siteCode?.[0]?.value}`
+    return sourceInfo ? `${sourceInfo.siteName?.beautifyRiverName()} - Site no: ${sourceInfo.siteCode?.[0]?.value}`
       : 'No river flow data available';
   }
 
@@ -159,8 +160,6 @@ function query(site_number) {
     const theUrl = `https://waterservices.usgs.gov/nwis/stat/?sites=${site_number}&statType=mean`;
 
     jQuery.get( theUrl, (response) => {
-      console.log ("Got average data:", response);
-
       const data = processRdb(response, today);
 
       // Process data from averages format into the same format as the iv data...
@@ -264,19 +263,21 @@ function query(site_number) {
 }
 
 function processRdb(text, today) {
+  // Filter out comments
   const lines = text.trim().split(/\n/).filter( l => !l.startsWith('#'));
-  const [columnLine, descLine, ...rowLines] = lines;
-  const columns = columnLine.split(/\t/);
-  const descs   = descLine.split(/\t/);
 
+  // Grab column names, data descriptions from header lines
+  const [columnLine, descLine, ...rowLines] = lines;
+  const columns = columnLine?.split(/\t/);
+  const descs   = descLine?.split(/\t/);
+
+  // Process each data row into objects with column-name/value pairs
   const makeRow = (row) => {
     return columns.reduce( (obj, col, i) => ({...obj, [col]: row.split(/\t/)[i] }), {} );
   }
   const rows = rowLines.map(makeRow);
 
-  console.log(rows);
-
-  // Partition the output by variable, and create a drawable chart time series for each variable-code
+  // Partition the output by USGS variable, and create a drawable chart time series for each variable-code
   // TODO: do this in one pass?
   const ret = {};
   for (const {
@@ -303,6 +304,8 @@ function show_error() {
   } );
 }
 
+
+let siteData;
 function load_sites() {
   $('#placeholder').hide();
 
@@ -310,41 +313,63 @@ function load_sites() {
     url: "/xml/sites.xml",
     dataType: "xml",
     success: function(response) {
-      var data = $("mapper site", response).map(function() {
+      const data = $("mapper site", response).map(function() {
         return {
           lng: $(this).attr("lng"),
           lat: $(this).attr("lat"),
-          value: $(this).attr("sna").toTitleCase(),
-          id: $(this).attr("sno")
+          id: $(this).attr("sno"),
+          value: $(this).attr("sna").beautifyRiverName(),
         };
       }).get();
-      setup_autocomplete( data );
-      selectSiteFromUrl( data );
+
+      siteData = new Map( data.map((s) => [s.id, s]) );
+
+      setup_autocomplete();
+      loadInitialView( siteData );
+
     }
   });
 }
 
-function selectSiteFromUrl(data) {
-  const params = window.location.hash.slice(1);
-  const match = params.match(/site-(\d+)/)
-  if (match) { 
-    const siteId = match[1];
-    const datum = data.find( (d) => d.id == siteId );
-    console.log("Loading page directly to site ID: : ", siteId, datum);
-    handleSelection(datum.value, datum.id);
+function loadInitialView(data) {
+  const state = parseUrlHash();
+  showPageState(state, data);
+}
+
+function showPageState(state, data) {
+  function lookupSite(site_number) {
+    return siteData.get(site_number);
+  }
+
+  switch (state.view) {
+    // Restore the map view with the original search term,
+    // Pop up auto-complete, etc.
+    case 'map-search':
+      hide_chart();
+      $('#site_name')
+        .val(state.search_term)
+        .autocomplete("search");
+      break;
+
+    // Show the chart data for the specifed site
+    case 'site-chart':
+      $('#site_name')
+        .val(lookupSite(state.site_id)?.value)
+        .autocomplete("close");
+
+      showChartView(state.site_id);
+      break;
   }
 }
 
-function handleSelection(site_name, site_number) {
-  $("#site_name").val( site_name );
+function showChartView(site_number) {
+  //$("#site_name").val( site_name );
   $("#site_number").val( site_number );
-
-  console.log( `Selected: ${site_name}, site id: ${site_number}` );
   $("#site").submit();
   show_chart();
 }
 
-function setup_autocomplete( data ) {
+function setup_autocomplete() {
   const mapSelectionEvent = new $.Event("map-selection-event");
   function eventWasFromMap(event) {
     return event?.originalEvent?.originalEvent?.type == mapSelectionEvent.type;
@@ -353,20 +378,14 @@ function setup_autocomplete( data ) {
   const widget = $( "#site_name" )
     .autocomplete({
       source: function( request, response ) {
-        var terms = request.term.split(/\s+/);
-        var candidates = data;
-        var results = [];
+        const terms = request.term.split(/\s+/);
+        let candidates = Array.from(siteData);
 
         for( var i=0; i<terms.length; i++) {
           var r = new RegExp( $.ui.autocomplete.escapeRegex(terms[i]), "i" );
-          results = [];
-          for( var j=0; j<candidates.length; j++) {
-            if (candidates[j].value.match(r)) {
-              results.push( candidates[j] );
-            }
-          }
-          candidates = results;
+          candidates = candidates.filter( ([id, site]) => site.value.match(r) );
         }
+        const results = candidates.map( ([id, site]) => site );
         //console.log( results );
         response(results);
       },
@@ -374,15 +393,13 @@ function setup_autocomplete( data ) {
         hide_chart();
 
         const menu = widget.menu;
-        console.log('widget: ', widget);
-        console.log('menu: ', menu);
 
+        const state = {view: "map-search", search_term: widget.term};
+        window.history.replaceState( state, "", `#${buildUrlHash(state)}`);
         zoom_markers(ui.content, onHover, onClick);
 
         function findMenuItem(d) {
-          console.log('omg', d, this);
           const menuItem = menu.element.find(`.ui-menu-item[data-site-id=${d.id}]` ).first();
-          console.log('menuItem: ', menuItem);
           return menuItem;
         }
 
@@ -391,7 +408,12 @@ function setup_autocomplete( data ) {
         }
 
         function onClick(d) {
-          menu.select(mapSelectionEvent, findMenuItem(d));
+          // Ugh, not sure why this is needed but JQuery Autocomplete doesn't
+          // like it there isn't an "active" menu item...
+          const event = new $.Event(mapSelectionEvent);
+          const menuItem = findMenuItem(d);
+          event.target = menuItem;
+          menu.select(event, menuItem);
         }
       },
       minLength: 3,
@@ -399,11 +421,14 @@ function setup_autocomplete( data ) {
         if (ui.item) {
           const site_name = ui.item.value;
           const site_number = ui.item.id;
-          const params = {site_name, site_number};
 
-          history.pushState( params, "", `#site-${params.site_number}`)
+          console.log( `Selected: ${site_name}, site id: ${site_number}` );
 
-          handleSelection(site_name, site_number);
+          // Consider this a "forward" navigation 
+          const state = {view: "site-chart", site_id: site_number};
+          history.pushState( state, "", `#${buildUrlHash(state)}`);
+
+          showChartView(site_number);
 
           if (!eventWasFromMap(event)) {
             highlight_marker( ui.item );
@@ -413,7 +438,7 @@ function setup_autocomplete( data ) {
           console.log( "Nothing selected, input was " + this.value );
         }
 
-        return false;
+        //return false;
       },
       focus: function( event, ui ) {
         const fromMap = eventWasFromMap(event);
@@ -425,7 +450,9 @@ function setup_autocomplete( data ) {
         highlight_marker( ui.item, doMapZoom );
 
         return false;
-      }
+      },
+      change: function( event, ui ) {
+      },
     })
     .data("ui-autocomplete");
 
@@ -440,7 +467,6 @@ function setup_autocomplete( data ) {
       .append(a)
       .appendTo( ul );
   };
-
 }
 
 var spinner = undefined;
@@ -481,6 +507,41 @@ function hide_chart() {
 function show_chart() {
   $(".flow-chart").show();
   $("#map").hide();
+}
+
+function onPageReady() {
+  load_sites();
+  $("#site").submit( function(event) {
+    query( $("#site_number").val() );
+    event.preventDefault();
+  } );
+
+  // Handle "back"
+  window.addEventListener("popstate", (event) => {
+
+    // hashState and state should match...
+    const hashState = parseUrlHash();
+    const state = event.state;
+
+    console.log( `POP state: location: ${document.location}
+      , state: ${JSON.stringify(state)}
+      , hashState: ${JSON.stringify(hashState)}
+    `);
+
+    showPageState(state);
+  });
+}
+
+function parseUrlHash() {
+  const hash = window.location.hash.substr(1);
+  return hash.split('&').reduce( (res, pair) => {
+    const [key, value] = pair.split('=');
+    return {...res, [decodeURI(key)]: decodeURI(value)};
+  }, {});
+}
+
+function buildUrlHash(params) {
+  return Object.entries(params).map( ([key, val]) => `${key}=${val}` ).join('&');
 }
 
 // vim: set et fenc=utf-8 ff=unix sts=0 sw=2 ts=2 :

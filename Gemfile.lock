@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     kgio (2.9.2)
-    rack (3.1.16)
+    rack (3.2.2)
     raindrops (0.13.0)
     unicorn (4.8.3)
       kgio (~> 2.6)
@@ -13,7 +13,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rack (>= 3.0.6.1)
+  rack (~> 3.2.0)
   unicorn
 
 RUBY VERSION
